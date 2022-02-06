@@ -8,9 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Formatter;
 
 @Slf4j
 public class MyFilter implements Filter {
@@ -23,10 +21,10 @@ public class MyFilter implements Filter {
     }
 
     /**
-     *  contentType: text/event-stream
-     *  화면에 데이터를 1초에 하나씩 출력한다.
+     *  contentType: text/event-stream => 화면에 데이터를 1초에 하나씩 출력.
+     *  text/plain => 5초 후 한번에 출력
      *
-     *  text/plain의 경우, 5초가 지난 후 한번에 출력하고 있다.
+     *  reactive streams 라이브러리를 통해 표준을 지키며 응답할 수 있도록 가능하다.
      */
     private void basicWebFluxStructure(ServletResponse response) throws Exception {
         HttpServletResponse servletResponse = (HttpServletResponse)response;
@@ -60,6 +58,13 @@ public class MyFilter implements Filter {
         }
     }
 
+    /**
+     * 무한 루프안에서 eventNotify의 상태를 체크한다.
+     * eventNotify.change = true일 때, 화면에 출력한다.
+     * eventNotify.change는 add할 때 true로 변경된다.
+     *
+     * sse emitter와 같은 라이브러리로 편리하게 구현할 수 있음.
+     */
     private void loop(ServletResponse response) throws Exception {
 
         HttpServletResponse servletResponse = (HttpServletResponse)response;
@@ -80,4 +85,8 @@ public class MyFilter implements Filter {
             }
         }
     }
+
+    // WebFlux -> Reactive Streams 가 적용된 stream. (단일 스레드, 비동기 처리) -> 단일 스레드가 효과적.
+    // Servlet MVC -> Reactive Streams 가 적용된 stream. (멀티 스레드)
+
 }
