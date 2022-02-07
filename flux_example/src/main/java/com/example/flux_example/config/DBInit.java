@@ -1,4 +1,4 @@
-package com.example.flux_example;
+package com.example.flux_example.config;
 
 import com.example.flux_example.domain.Customer;
 import com.example.flux_example.domain.CustomerRepository;
