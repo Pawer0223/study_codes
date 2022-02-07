@@ -1,8 +1,2 @@
-## dir_name 1
-- simple description
-
-## dir_name 2
-- simple description
-
-## dir_name 3
-- simple description
+## 실습 projects
+- 각 dir 별 readme.md 작성
