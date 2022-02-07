@@ -57,8 +57,8 @@ public class MyFilter implements Filter {
     private void basicWebFluxStructure(ServletResponse response) throws Exception {
         HttpServletResponse servletResponse = (HttpServletResponse)response;
 
-        servletResponse.setContentType("text/plain; charset=UTF-8");
-       //  servletResponse.setContentType("text/event-stream; charset=UTF-8");
+        // servletResponse.setContentType("text/plain; charset=UTF-8");
+        servletResponse.setContentType("text/event-stream; charset=UTF-8");
         PrintWriter out = servletResponse.getWriter();
 
         for (int i = 0; i < 5; i++) {
@@ -80,7 +80,7 @@ public class MyFilter implements Filter {
 
         try {
             basicWebFluxStructure(response);
-            // loop(response);
+            loop(response);
         } catch (Exception e) {
             e.printStackTrace();
         }
