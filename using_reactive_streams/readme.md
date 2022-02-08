@@ -36,4 +36,4 @@
 
 # Next
 
-- WebFlux 사용해보기
+- [WebFlux 사용해보기](https://github.com/Pawer0223/study_codes/blob/main/flux_example/readme.md)
