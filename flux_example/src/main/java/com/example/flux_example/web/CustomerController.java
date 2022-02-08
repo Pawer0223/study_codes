@@ -12,7 +12,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 
-import javax.print.attribute.standard.Media;
 import java.time.Duration;
 
 @RestController
@@ -24,7 +23,6 @@ public class CustomerController {
     // A 요청 -> Flux -> Stream
     // B 요청 -> Flux -> Stream
     // 2개의 Stream 을 합쳐서 싱크를 맞춰 줌.
-
     public CustomerController(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
         this.sink = Sinks.many().multicast().onBackpressureBuffer();
@@ -51,7 +49,6 @@ public class CustomerController {
         // 4. onNext 를 설정에 맞게 호출.
         // 5. 모든 데이터를 가져오면 onComplete 호출. 이 때, 응답이 된다.
 
-        //
         return customerRepository.findAll().delayElements(Duration.ofSeconds(1)).log();
     }
 
