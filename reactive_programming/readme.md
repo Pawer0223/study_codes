@@ -52,3 +52,10 @@ onSubscribe onNext* (onError | onComplete)?
 - 만약 10건의 데이터 중 2건만 가져오면, 8건은 반복적으로 받아올 수 없다.
   - 다시 요청하기 위해서는 Subscriber의 onNext에서 다시 request를 요청해야 한다.
   - 이렇게 처리하는 이유는 Subscriber의 onNext에서 현재 애플리케이션의 상태를 확인하고, request를 요쳥할수 있다는 장점을 취할 수 있기 때문이다. (* 중요)
+
+# Publisher
+- 데이터 스트림을 계속적으로 만들어내는 Provider의 역할
+
+# Subscriber
+- Publisher가 보낸것을 받아서 최종적으로 사용
+
