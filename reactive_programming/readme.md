@@ -129,7 +129,6 @@ public class DelegateSub<T, R> implements Subscriber<T> {
 # Schedulers
 
 - publisher의 동작을 별도의 쓰레드에서 처리하고 싶다.
-  - request에서 -> onNext()의 호출.
 - Scheduler를 통해 해결할 수 있다. reactive-programming에서 scheduler는 아래 2가지 함수 호출을 통해 지정할 수 있다.
 
 ### 1. publishOn
