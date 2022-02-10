@@ -59,3 +59,67 @@ onSubscribe onNext* (onError | onComplete)?
 # Subscriber
 - Publisher가 보낸것을 받아서 최종적으로 사용
 
+# Operators
+- Publisher가 Subscriber에게 데이터를 Push할 때, 중간에서 데이터를 가공하는 기능을 수행할 수 있다.
+- 인자로 전달받은 Publisher의 subscribe를 새로운 Publisher에서 호출한다.
+  - subscribe를 호출하면서 데이터에 함수를 적용한다.
+
+
+
+``` java
+
+public static void main(String[] args) {
+    Iterable<Integer> iter = Stream.iterate(1, a->a + 1).limit(10).collect(Collectors.toList());
+    Publisher<Integer> pub = iterPub(iter);
+    Publisher<Integer> mapPub = mapPub(pub, s -> s * 10);
+    mapPub.subscribe(logSub());
+}
+
+// 중계자의 역할을 함.
+private static <T, R> Publisher<R> mapPub(Publisher<T> pub, Function<T, R> f) {
+    return new Publisher<R>() {
+        @Override
+        public void subscribe(Subscriber<? super R> sub) {
+            pub.subscribe(new DelegateSub<T, R>(sub) {
+                @Override
+                public void onNext(T i) {
+                    sub.onNext(f.apply(i));
+                }
+            });
+        }
+    };
+}
+```
+
+- DelegateSub 클래스는 전달 받은 Subscriber의 함수를 다시 호출하는 것이 전부이다.
+```java
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+public class DelegateSub<T, R> implements Subscriber<T> {
+
+    Subscriber sub;
+
+    public DelegateSub(Subscriber<? super R> sub) {
+        this.sub = sub;
+    }
+    @Override
+    public void onSubscribe(Subscription s) {
+        sub.onSubscribe(s);
+    }
+    @Override
+    public void onNext(T i) {
+        sub.onNext(i);
+    }
+    @Override
+    public void onError(Throwable throwable) {
+        sub.onError(throwable);
+    }
+    @Override
+    public void onComplete() {
+        sub.onComplete();
+    }
+}
+
+```
+
