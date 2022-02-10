@@ -10,7 +10,6 @@ public class DelegateSub<T, R> implements Subscriber<T> {
     public DelegateSub(Subscriber<? super R> sub) {
         this.sub = sub;
     }
-
     @Override
     public void onSubscribe(Subscription s) {
         sub.onSubscribe(s);
