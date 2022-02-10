@@ -131,13 +131,19 @@ public class DelegateSub<T, R> implements Subscriber<T> {
 - publisher의 동작을 별도의 쓰레드에서 처리하고 싶다.
   - request에서 -> onNext()의 호출.
 - Scheduler를 통해 해결할 수 있다. reactive-programming에서 scheduler는 아래 2가지 함수 호출을 통해 지정할 수 있다.
-  - publishOn
-    - subscriber가 느린 경우에, 데이터를 받는쪽에서 별도이 쓰레드를 생성해서 처리할 수 있다.
-![image](https://user-images.githubusercontent.com/26343023/153431138-2d07943d-25bd-4240-afb5-bfb81e22c885.png)
 
-  - subscribeOn
-    - publisher가 느린경우 사용하면 좋다.(blocking I.O ...)
-    - 동그라미 하나당 onNext를 통해 data를 보내는 동작.
-    - subScribeOn에 전달되는 스케줄러를 통해 그림 상단의 요청들을 처리하게 됨.
+### 1. publishOn
+- subscriber가 느린 경우에, 데이터를 받는쪽에서 별도의 쓰레드를 생성해서 처리할 수 있다.
+<img width="426" alt="image" src="https://user-images.githubusercontent.com/26343023/153431663-eb76b643-cea0-4c06-9d72-1876f8f57aa5.png">
+
+### 2. subscribeOn
+- publisher가 느린경우 사용하면 좋다.(blocking I.O ...)
+- 동그라미 하나당 onNext를 통해 data를 보내는 동작.
+- subScribeOn에 전달되는 스케줄러를 통해 그림 상단의 요청들을 처리하게 됨.
 <img width="401" alt="image" src="https://user-images.githubusercontent.com/26343023/153426486-7c717733-24d2-437c-a890-e4df2e5d989b.png">
+
+# User Thread 와 Demon Thread
+- User Thread는 하나라도 살아있다면 종료하지 않고 계속 진행.
+- Demon Thread는 User Thread가 하나도 없다면 종료.
+  - Flux.interval은 데몬 쓰레드로 동작 함 !
 
