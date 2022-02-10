@@ -95,8 +95,6 @@ public class PubSub {
 
         p.subscribe(s);
         es.shutdown();
-
-
         /**
          *
          * subscriber -> publisher 구독
@@ -117,7 +115,6 @@ public class PubSub {
          *      - control 하기 위한 역할.
          *
          *
-         *
          * 백프레셔
          *  - 나는 데이터를 어떻게 받겠어, 라는 의도를 이야기 하는 것.
          *
@@ -136,6 +133,5 @@ public class PubSub {
          *
          *
         */
-
     }
 }
