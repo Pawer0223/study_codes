@@ -146,3 +146,6 @@ public class DelegateSub<T, R> implements Subscriber<T> {
 - Demon Thread는 User Thread가 하나도 없다면 종료.
   - Flux.interval은 데몬 쓰레드로 동작 함 !
 
+# Java의 Future 
+-  비동기적 처리의 결과를 가지고 있는 객체.
+
