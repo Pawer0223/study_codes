@@ -146,6 +146,11 @@ public class DelegateSub<T, R> implements Subscriber<T> {
 - Demon Thread는 User Thread가 하나도 없다면 종료.
   - Flux.interval은 데몬 쓰레드로 동작 함 !
 
-# Java의 Future 
--  비동기적 처리의 결과를 가지고 있는 객체.
+# Java에서 비동기 처리의 결과를 받는 방법.
+- Future
+  - Future는 비동기적 처리의 결과를 가지고 있는 객체.
+  - Future.get()은 Blocking 메서드 이다.
+
+- Callback
+  - FuterTask를 이용해서, callback함수로 처리하도록 할 수 있다.
 
