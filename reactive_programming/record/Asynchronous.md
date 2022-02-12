@@ -1,6 +1,5 @@
-# 출처
-
-- [내용 및 사진 출처 - 토비님 강의(강추 !)](https://www.youtube.com/watch?v=aSTuQiPB4Ns&list=PLOLeoJ50I1kkqC4FuEztT__3xKSfR2fpw&index=4)
+# 내용 및 사진 출처
+- [토비님 강의 1:24:47 부터 - 비동기 이해하는데 아주 좋네. 기가막힌다](https://www.youtube.com/watch?v=aSTuQiPB4Ns&list=PLOLeoJ50I1kkqC4FuEztT__3xKSfR2fpw&index=4)
 
 # 서블릿의 비동기 처리방식부터.. 이해해보자
 
