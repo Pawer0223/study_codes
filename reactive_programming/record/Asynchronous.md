@@ -1,7 +1,10 @@
 # 내용 및 사진 출처
 - [토비님 강의 1:24:47 부터 - 비동기 이해하는데 아주 좋네. 기가막힌다](https://www.youtube.com/watch?v=aSTuQiPB4Ns&list=PLOLeoJ50I1kkqC4FuEztT__3xKSfR2fpw&index=4)
+- [참조 슬라이드](https://www.slideshare.net/brikis98/the-play-framework-at-linkedin/8-Thread_pool_usageLatencyThread_pool_hell)
 
-# 서블릿의 비동기 처리방식부터.. 이해해보자
+# 비동기 처리방식
+
+### 서블릿의 비동기 처리방식
 
 - 서블릿은 기본적으로 Blocking IO (InputStream자체가 Blocking)
 - 여러개의 Request를 받게되면, 다른 스레드는 대기했다가 끝나면 처리한다.
@@ -32,6 +35,27 @@
 ### 이걸 더 응용 한다면??
 - 오직 하나의 서블릿 쓰레드만 사용하고, 주요 처리는 모두 Work Thread를 통해 처리한다면, `이 수많은 요청을 처리하는 하나의 서블릿 쓰레드`를 더욱 의미있게 활용할 수 있다.
   - 요청을 빠르게 받고 응답해주고, 뒤에서 일을시키는 역할.
+
+### 전부가 아니다.
+- 하지만 단순히 비동기 서블릿을 새롭게 호출한다고 해결할 수 없는 경우가 많다. 
+- 서블릿 요청은 바로 사용가능해도 결국 워커 스레드에서 수행되는 I/O와 같은 작업에서 또한 Blocking이 될 수 있다.
+
+### Thread Hell
+- 요청이 몰리는 생황이 발생한다.
+<img width="526" alt="image" src="https://user-images.githubusercontent.com/26343023/153741159-9dfdb413-8f6b-49f4-9907-0f07ac9e403a.png">
+
+### Thread Hell이 발생하는 이유
+<img width="590" alt="image" src="https://user-images.githubusercontent.com/26343023/153742652-7c5e8d1a-5e18-4810-9de8-11804fc84483.png">
+
+- 현대의 서비스 아키텍처 구조는 다른 서버로의 요청이 많이 발생한다. 서비스를 분리하거나, 외부 서비스를 이용하거나. 
+  - 이 과정에서 Network I/O가 많이 발생한다. 
+- 결국 CPU는 일하지 않고 있는데, 다른 요청이 처리되기를 대기하게된다.
+  - 아무리 비동기로 요청을 보내도, 다음 Network 요청을 보내기 위해서는 대기시간이 발생할 수 밖에 없는 아키텍처 구조가 되었다.
+
+
+
+
+
 
 # DeferredResult 큐?? (*중요 *핵심)
 <img width="695" alt="image" src="https://user-images.githubusercontent.com/26343023/153714784-61c8bbb6-5722-41b1-b610-0bbefb8eebd8.png">
