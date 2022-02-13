@@ -85,6 +85,30 @@
 - DeferredResult + Non Blocking I/O로 서버의 자원을 최소화 하면서 많은 양의 작업을 수행할 수 있다..
 
 # Emitter
- - 한번의 요청에, 여러번의 응답을 보낼 수 있도록 할 수 있다.
- - 한번의 요청에 여러번 `emiiter.send`를 보낼 수 있다.
- - SSE표준을 따라 데이터를 streaming방식으로 response한다.
+- 한번의 요청에, 여러번의 응답을 보낼 수 있도록 할 수 있다.
+- 한번의 요청에 여러번 `emiiter.send`를 보낼 수 있다.
+- SSE표준을 따라 데이터를 streaming방식으로 response한다.
+
+# CompletableFuture
+- 명시적으로 작업을 종료, 실패시킬 수 있다. 
+  - Javascript에서 Promise 와 유사
+  - 아래 코드처럼 명시적으로, 비동기 작업의 순서에 따라 구현가능 함.
+
+``` java
+
+...
+
+CompletableFuture
+              .runAsync(() -> log.info("runAsync"))
+              .thenRun(() -> log.info("thenRun"))
+              .thenRun(() -> log.info("thenRun"));
+log.info("exit");
+
+ForkJoinPool.commonPool().shutdown();
+ForkJoinPool.commonPool().awaitTermination(10, TimeUnit.SECONDS);
+
+...
+
+```
+
+
