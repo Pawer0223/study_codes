@@ -1,19 +1,23 @@
+# Mono
+- Publisher. (Publisher Interface를 구현)
+- `즉, Subscriber를 구독하지 않으면 시작하지 않음 !`
+	- Publisher는 Subscriber가 subscribe할 때 처리가 시작됨.
+	- Publisher.subscribe(Subcriber) 하면
+	- Subscriber.onSubscribe(..) 부터 시작 됨.
+- Reactive Programming에서 단일 값을 의미. (다중 값은 Flux)
+
 # WebClient
-* AsyncRestTemplate 과 유사한 것
-* Builder Style
-* Mono 를 반환.
-	* ResponseEntity와 유사.
-* Mono는, Publisher이다. (Publisher Interface를 구현)
-	* `즉, Subscriber를 구독하지 않으면 시작하지 않음 !`
-		* Publisher는 Subscriber가 subscribe할 때 처리가 시작됨.
-		* Publisher.subscribe(Subcriber) 하면
-		* Subscriber.onSubscribe(..) 부터 시작 됨.
-* WebFlux에서 subscribe함수의 호출은 Spring이 대신해 준다.
-	* 언제?
-	* Mono 또는 Flux객체를 반환할 때
-	* rest()메서드 에서는 2개의 외부 API와 1개의 내부 API를 호출한다.
-		* 하지만 모두 비동기를 처리할 수 있는 객체로 반환하기 때문에(Mono, CompletableFuture) 어디서도 Blocking되지 않는다.
-		* 결과적으로 Non-Blocking 코드를 깔끔하게 작성할 수 있다.
+
+- AsyncRestTemplate 과 유사한 것
+- Builder Style
+- Mono 를 반환.
+	- ResponseEntity와 유사.
+- WebFlux에서 subscribe함수의 호출은 Spring이 대신해 준다.
+	- 언제?
+	- Mono 또는 Flux객체를 반환할 때
+	- rest()메서드 에서는 2개의 외부 API와 1개의 내부 API를 호출한다.
+		- 하지만 모두 비동기를 처리할 수 있는 객체로 반환하기 때문에(Mono, CompletableFuture) 어디서도 Blocking되지 않는다.
+		- 결과적으로 Non-Blocking 코드를 깔끔하게 작성할 수 있다.
 ``` java
 
 	...
@@ -125,3 +129,7 @@ public static class MyService {
 # Publihser 의 hot, cold 소스
 - hot: 실시간으로 일어나는 데이터들, 구독하는 시점부터 실시간으로 발생하는 데이터만 가지고 옴
 - cold: 데이터가 고정, 어느 subscriber든지 동일한 결과가 셋팅 됨.
+
+# Flux
+- stream...
+- 데이터가 여러개(0개 이상)일 땐, Flux
