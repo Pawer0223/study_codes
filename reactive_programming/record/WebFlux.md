@@ -55,7 +55,7 @@ public static class MyService {
 
 # 이해하기
 
-- 출력순서 ?
+#### 출력순서 ?
 ``` java
 
     @GetMapping("/")
@@ -81,7 +81,7 @@ public static class MyService {
 <li>2022-02-14 16:41:03.153  INFO 44037 --- [ctor-http-nio-2] reactor.Mono.Just.1                      : | onComplete()</li>
 </details>
 
-- 그럼 아래의 경우, Service는 Return 되고 실행?
+#### 그럼 아래의 경우, Service는 Return 되고 실행?
 ``` java
 
     @GetMapping("/")
@@ -98,7 +98,7 @@ public static class MyService {
 	실행은 먼저되고, subscribe시점에 가져다 쓰게 됨. But Callback스타일로 나중에 실행되게도 처리할 수 있다.(Mono.fromSupplier( ... 함수 전달 ... ))
 </details>
 
-- 이 경우는 어케될까?
+#### 이 경우는 어케될까?
 
 ``` java
     @GetMapping("/")
@@ -118,6 +118,8 @@ public static class MyService {
 	<li>Mono객체 m에 걸린 체인이 그대로 m.subscribe()에서 실행</li>
 	<li>pos2</li>
 	<li>spring에 의해 subscribe한번 더 호출</li>
+	<h5>실행 결과를 보면, Mono객체에 들어있는 subscribe를 호출하고 pos2가 찍혔다. 즉, Blocking되어 처리된다. m.subscribe()를 m.block();으로 바꿔도 결과가 동일하다.</h5>
+	<h5>Blocking되는 것을 강조하기위해 함수이름또한 block이다. block은 Mono에 들어있는 값을 리턴받을 수 있다. 주의해야 함.</h5>
 </details>
 
 # Publihser 의 hot, cold 소스
