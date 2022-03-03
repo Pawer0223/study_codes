@@ -34,9 +34,10 @@ $ docker exec -it mysql-container bash
 root@a8e67d74549b:/# mysql -u root -p0000
 
 # 계정생성 -> 권한부여 -> 데이터베이스 생성
-mysql> create user 'test'@'%' identified by '0000';
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'test'@'%';
-mysql> create database test;
-mysql> use test;
-
+# 계정 암호 8자리 이상이어야 함... (처음에 0000했다가 엄청 삽질함..)
+create user 'test'@'172.17.0.1' identified by 'testpw';
+GRANT ALL PRIVILEGES ON *.* TO 'test'@'172.17.0.1' WITH GRANT OPTION;
+create database test;
+flush privileges;
+exit;
 ```
