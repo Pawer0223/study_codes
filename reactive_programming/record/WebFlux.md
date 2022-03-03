@@ -127,6 +127,7 @@ public static class MyService {
 </details>
 
 # Publihser 의 hot, cold 소스
+- [참조](https://projectreactor.io/docs/core/snapshot/reference/#reactor.hotCold)
 - hot: 실시간으로 일어나는 데이터들, 구독하는 시점부터 실시간으로 발생하는 데이터만 가지고 옴
 - cold: 데이터가 고정, 어느 subscriber든지 동일한 결과가 셋팅 됨.
 
