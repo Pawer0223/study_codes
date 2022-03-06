@@ -1,17 +1,18 @@
 package com.example.jwt_service.filter;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 
+@Slf4j
 public class MyFilter1 implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
-
-        System.out.println(this.getClass());
+        log.info("doFilter");
         filterChain.doFilter(request, response);
     }
 }

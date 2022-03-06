@@ -1,7 +1,7 @@
 package com.example.jwt_service.config;
 
-import com.example.jwt_service.filter.MyFilter1;
 import com.example.jwt_service.filter.MyFilter3;
+import com.example.jwt_service.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,6 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(corsFilter) // 인증이 존재할 때 시큐리티 필터에 등록. 인증이 없다면 @CrossOrigin
                 .formLogin().disable() // form 태그로 로그인 안하겠다.
+                // but login 요청에 대한 filter 는 적용. authenticationManager 는 WebSecurityConfigurerAdapter에 존재.
+                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .httpBasic().disable() // httpBasic: authorization 헤더 필드에 id, pw를 담아서 보내는 요청 !
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/**")
