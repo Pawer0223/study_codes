@@ -18,9 +18,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 
 // security 에서 제공하는 filter
@@ -39,7 +36,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             User user = objectMapper.readValue(request.getInputStream(), User.class);
-            log.info("User : {}", user);
+            log.info("json parameter : {}", user);
             // token 생성, username, pw를 통해 토큰을 생성.
             UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(user.getName(), user.getPassword());
@@ -53,7 +50,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             // 굳이 JWT 토큰 사용시에는 세션을 만들 이유가 없다. but 권한관리를 위해 저장.
             return authentication;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.info("not exist user");
         }
         return null;
     }

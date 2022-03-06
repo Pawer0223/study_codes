@@ -34,4 +34,22 @@ public class RestApiController {
         userRepository.save(user);
         return "create " + user.getName();
     }
+
+    // user, manager, admin
+    @GetMapping("/api/v1/user")
+    public String user() {
+        return "user";
+    }
+
+    // manager, admin
+    @GetMapping("/api/v1/user/manager")
+    public String manager() {
+        return "manager";
+    }
+
+    // admin
+    @GetMapping("/api/v1/user/admin")
+    public String admin() {
+        return "admin";
+    }
 }

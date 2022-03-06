@@ -20,14 +20,15 @@ public class MyFilter3 implements Filter {
 
         if (req.getMethod().equals("POST")) {
             String headerAuth = req.getHeader("Authorization");
-
             if (headerAuth.equals("test")) {
                 log.info("Authorization Header --> {}", headerAuth);
-                filterChain.doFilter(req, res);
+                // filterChain.doFilter(req, res);
             } else {
                 PrintWriter writer = res.getWriter();
                 writer.println("token must me test");
+                return ;
             }
         }
+        filterChain.doFilter(req, res);
     }
 }
