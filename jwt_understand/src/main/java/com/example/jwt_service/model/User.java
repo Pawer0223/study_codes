@@ -1,7 +1,6 @@
 package com.example.jwt_service.model;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor
+@Builder
 @Entity
 public class User {
 

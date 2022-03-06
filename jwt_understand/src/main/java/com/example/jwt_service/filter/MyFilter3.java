@@ -20,12 +20,12 @@ public class MyFilter3 implements Filter {
 
         if (req.getMethod().equals("POST")) {
             String headerAuth = req.getHeader("Authorization");
-            if (headerAuth.equals("test")) {
+            if (headerAuth != null && headerAuth.equals("test")) {
                 log.info("Authorization Header --> {}", headerAuth);
                 // filterChain.doFilter(req, res);
             } else {
                 PrintWriter writer = res.getWriter();
-                writer.println("token must me test");
+                writer.println("token must be \"test\"");
                 return ;
             }
         }

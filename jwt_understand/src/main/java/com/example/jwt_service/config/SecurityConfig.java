@@ -41,6 +41,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/admin/**")
                 .access("hasRole('ROLE_MANAGER')")
                 .anyRequest().permitAll();
-
     }
 }
