@@ -9,5 +9,4 @@ class FilterAndInterceptorApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
